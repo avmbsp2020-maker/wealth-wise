@@ -27,12 +27,15 @@
             background-color: #f9f9f9;
             color: var(--dark);
             line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 1.5rem 0;
+            padding: 1rem 0;
             box-shadow: var(--shadow);
             position: sticky;
             top: 0;
@@ -56,7 +59,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
         }
         
@@ -75,10 +78,13 @@
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
+            padding: 0.5rem;
+            border-radius: 4px;
         }
         
-        nav a:hover {
+        nav a:hover, nav a.active {
             color: var(--accent);
+            background: rgba(255, 255, 255, 0.1);
         }
         
         .hero {
@@ -86,17 +92,17 @@
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 5rem 0;
+            padding: 4rem 0;
             text-align: center;
         }
         
         .hero h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
         }
         
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             max-width: 700px;
             margin: 0 auto 2rem;
         }
@@ -121,8 +127,16 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
         
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2980b9;
+        }
+        
         .section {
-            padding: 5rem 0;
+            padding: 4rem 0;
         }
         
         .section-title {
@@ -131,7 +145,7 @@
         }
         
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: var(--primary);
             margin-bottom: 1rem;
         }
@@ -142,11 +156,25 @@
             margin: 0 auto;
         }
         
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
         .form-container {
             background-color: white;
             border-radius: 10px;
             box-shadow: var(--shadow);
-            padding: 2.5rem;
+            padding: 2rem;
             margin-bottom: 2rem;
         }
         
@@ -173,6 +201,7 @@
         .form-control:focus {
             border-color: var(--secondary);
             outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
         }
         
         .form-row {
@@ -278,14 +307,11 @@
             border-left: 5px solid var(--accent);
         }
         
-        .hidden {
-            display: none;
-        }
-        
         footer {
             background-color: var(--primary);
             color: white;
             padding: 3rem 0 1.5rem;
+            margin-top: auto;
         }
         
         .footer-content {
@@ -346,6 +372,63 @@
             font-size: 0.9rem;
         }
         
+        /* Resources Page Styles */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .resource-card i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .calculator-container {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .calculator-result {
+            background: #f8f9fa;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .calculator-result.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         /* Results Page Styles */
         .results-hero {
             background: linear-gradient(135deg, var(--secondary), var(--accent));
@@ -367,6 +450,11 @@
             padding: 1.5rem;
             box-shadow: var(--shadow);
             text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-5px);
         }
         
         .summary-card i {
@@ -403,6 +491,11 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            transition: transform 0.2s;
+        }
+        
+        .recommendation-list li:hover {
+            transform: translateX(5px);
         }
         
         .recommendation-list li i {
@@ -448,6 +541,11 @@
             background: white;
             border-radius: 8px;
             box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+        
+        .investment-item:hover {
+            transform: translateX(5px);
         }
         
         .investment-bar {
@@ -463,6 +561,59 @@
             height: 100%;
             border-radius: 5px;
             background-color: var(--secondary);
+            transition: width 1s ease;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--secondary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            width: 45%;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .timeline-item:nth-child(odd) {
+            margin-left: auto;
+        }
+        
+        .timeline-item:nth-child(even) {
+            margin-right: auto;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .timeline-item:nth-child(odd)::before {
+            left: -35px;
+        }
+        
+        .timeline-item:nth-child(even)::before {
+            right: -35px;
         }
         
         @media (max-width: 768px) {
@@ -477,7 +628,7 @@
             }
             
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             
             .form-row {
@@ -488,44 +639,86 @@
             .section {
                 padding: 3rem 0;
             }
-        }
-        
-        .currency-symbol {
-            font-family: Arial, sans-serif;
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+            
+            .timeline-item::before {
+                left: -35px !important;
+                right: auto !important;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Input Page -->
-    <div id="input-page">
-        <header>
-            <div class="container">
-                <div class="header-content">
-                    <div class="logo">
-                        <i class="fas fa-chart-line"></i>
-                        <span>WealthWise</span>
-                    </div>
-                    <nav>
-                        <ul>
-                            <li><a href="#financial-profile">Financial Profile</a></li>
-                            <li><a href="#investment-advice">Investment Advice</a></li>
-                            <li><a href="#financial-plan">Financial Plan</a></li>
-                            <li><a href="#resources">Resources</a></li>
-                        </ul>
-                    </nav>
+    <!-- Header (Same for all pages) -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>WealthWise</span>
                 </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-page="financial-profile">Financial Profile</a></li>
+                        <li><a href="#" class="nav-link" data-page="investment-advice">Investment Advice</a></li>
+                        <li><a href="#" class="nav-link" data-page="financial-plan">Financial Plan</a></li>
+                        <li><a href="#" class="nav-link" data-page="resources">Resources</a></li>
+                    </ul>
+                </nav>
             </div>
-        </header>
+        </div>
+    </header>
 
+    <!-- Home Page -->
+    <div id="home-page" class="page active">
         <section class="hero">
             <div class="container">
                 <h1>Take Control of Your Financial Future</h1>
                 <p>Get personalized investment advice and create a financial plan tailored to your income, assets, liabilities, and dreams.</p>
-                <a href="#financial-profile" class="btn">Start Planning Now</a>
+                <a href="#" class="btn start-planning-btn">Start Planning Now</a>
             </div>
         </section>
 
-        <section id="financial-profile" class="section">
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Why Choose WealthWise?</h2>
+                    <p>We provide comprehensive financial planning tools to help you achieve your financial goals</p>
+                </div>
+                
+                <div class="advice-grid">
+                    <div class="advice-card">
+                        <i class="fas fa-user-check"></i>
+                        <h4>Personalized Analysis</h4>
+                        <p>Get customized financial advice based on your unique situation and goals.</p>
+                    </div>
+                    <div class="advice-card">
+                        <i class="fas fa-chart-pie"></i>
+                        <h4>Investment Planning</h4>
+                        <p>Create optimized investment portfolios based on your risk tolerance.</p>
+                    </div>
+                    <div class="advice-card">
+                        <i class="fas fa-bullseye"></i>
+                        <h4>Goal Tracking</h4>
+                        <p>Set and track progress toward your short, medium, and long-term financial goals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Financial Profile Page -->
+    <div id="financial-profile-page" class="page">
+        <section class="section">
             <div class="container">
                 <div class="section-title">
                     <h2>Your Financial Profile</h2>
@@ -544,7 +737,7 @@
                                 <div class="form-col">
                                     <div class="form-group">
                                         <label for="annual-income">Annual Income (₹)</label>
-                                        <input type="number" id="annual-income" class="form-control" placeholder="e.g., 750000" required>
+                                        <input type="number" id="annual-income" class="form-control" placeholder="e.g., 750000" min="0" step="1000" required>
                                     </div>
                                 </div>
                                 <div class="form-col">
@@ -579,29 +772,29 @@
                                 <div class="form-col">
                                     <div class="form-group">
                                         <label for="savings">Savings & Cash (₹)</label>
-                                        <input type="number" id="savings" class="form-control" placeholder="e.g., 150000" required>
+                                        <input type="number" id="savings" class="form-control" placeholder="e.g., 150000" min="0" step="1000" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="investments">Current Investments (₹)</label>
-                                        <input type="number" id="investments" class="form-control" placeholder="e.g., 250000">
+                                        <input type="number" id="investments" class="form-control" placeholder="e.g., 250000" min="0" step="1000">
                                     </div>
                                     <div class="form-group">
                                         <label for="property">Property Value (₹)</label>
-                                        <input type="number" id="property" class="form-control" placeholder="e.g., 3000000">
+                                        <input type="number" id="property" class="form-control" placeholder="e.g., 3000000" min="0" step="1000">
                                     </div>
                                 </div>
                                 <div class="form-col">
                                     <div class="form-group">
                                         <label for="debts">Total Debts (₹)</label>
-                                        <input type="number" id="debts" class="form-control" placeholder="e.g., 450000" required>
+                                        <input type="number" id="debts" class="form-control" placeholder="e.g., 450000" min="0" step="1000" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="monthly-expenses">Monthly Expenses (₹)</label>
-                                        <input type="number" id="monthly-expenses" class="form-control" placeholder="e.g., 30000" required>
+                                        <input type="number" id="monthly-expenses" class="form-control" placeholder="e.g., 30000" min="0" step="100" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="emergency-fund">Emergency Fund (₹)</label>
-                                        <input type="number" id="emergency-fund" class="form-control" placeholder="e.g., 100000">
+                                        <input type="number" id="emergency-fund" class="form-control" placeholder="e.g., 100000" min="0" step="1000">
                                     </div>
                                 </div>
                             </div>
@@ -659,66 +852,88 @@
                 </div>
             </div>
         </section>
+    </div>
 
-        <footer>
+    <!-- Investment Advice Page -->
+    <div id="investment-advice-page" class="page">
+        <section class="section">
             <div class="container">
-                <div class="footer-content">
-                    <div class="footer-section">
-                        <h3>WealthWise</h3>
-                        <p>Your trusted partner in financial planning and investment advice. We're committed to helping you achieve your financial dreams.</p>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
+                <div class="section-title">
+                    <h2>Investment Advice</h2>
+                    <p>Learn about different investment options and strategies based on your risk profile</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-chart-line"></i> Risk-Based Investment Strategies</h3>
+                    <div class="advice-grid">
+                        <div class="advice-card priority-low">
+                            <h4>Conservative Investor</h4>
+                            <p><strong>Recommended Allocation:</strong> 30% Stocks, 50% Bonds, 15% Cash, 5% Real Estate</p>
+                            <p><strong>Best For:</strong> Risk-averse investors, short-term goals, retirees</p>
+                            <p><strong>Recommended Investments:</strong> Government bonds, fixed deposits, debt mutual funds, blue-chip stocks</p>
                         </div>
-                    </div>
-                    
-                    <div class="footer-section">
-                        <h3>Quick Links</h3>
-                        <a href="#financial-profile">Financial Profile</a>
-                        <a href="#investment-advice">Investment Advice</a>
-                        <a href="#financial-plan">Financial Plan</a>
-                        <a href="#resources">Resources</a>
-                    </div>
-                    
-                    <div class="footer-section">
-                        <h3>Contact Us</h3>
-                        <p><i class="fas fa-map-marker-alt"></i> 123 Finance Street, Mumbai</p>
-                        <p><i class="fas fa-phone"></i> +91 (555) 123-4567</p>
-                        <p><i class="fas fa-envelope"></i> info@wealthwise.com</p>
+                        <div class="advice-card priority-medium">
+                            <h4>Moderate Investor</h4>
+                            <p><strong>Recommended Allocation:</strong> 60% Stocks, 30% Bonds, 5% Cash, 5% Real Estate</p>
+                            <p><strong>Best For:</strong> Balanced growth seekers, medium-term goals</p>
+                            <p><strong>Recommended Investments:</strong> Balanced mutual funds, index funds, corporate bonds</p>
+                        </div>
+                        <div class="advice-card priority-high">
+                            <h4>Aggressive Investor</h4>
+                            <p><strong>Recommended Allocation:</strong> 80% Stocks, 15% Bonds, 0% Cash, 5% Real Estate</p>
+                            <p><strong>Best For:</strong> Long-term growth, young investors, high risk tolerance</p>
+                            <p><strong>Recommended Investments:</strong> Growth stocks, sector funds, equity mutual funds, ETFs</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="copyright">
-                    <p>&copy; 2023 WealthWise Financial Planning. All rights reserved.</p>
-                    <p>This tool provides educational information only and does not constitute financial advice.</p>
+                <div class="card">
+                    <h3><i class="fas fa-calculator"></i> Investment Calculator</h3>
+                    <div class="calculator-container">
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="initial-investment">Initial Investment (₹)</label>
+                                    <input type="number" id="initial-investment" class="form-control" placeholder="e.g., 100000" min="0" step="1000">
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="monthly-contribution">Monthly Contribution (₹)</label>
+                                    <input type="number" id="monthly-contribution" class="form-control" placeholder="e.g., 5000" min="0" step="100">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="annual-return">Expected Annual Return (%)</label>
+                                    <input type="number" id="annual-return" class="form-control" placeholder="e.g., 10" min="1" max="30" step="0.1">
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="investment-years">Investment Period (Years)</label>
+                                    <input type="number" id="investment-years" class="form-control" placeholder="e.g., 10" min="1" max="50" step="1">
+                                </div>
+                            </div>
+                        </div>
+                        <button id="calculate-investment" class="btn">Calculate Future Value</button>
+                        
+                        <div id="investment-result" class="calculator-result">
+                            <h4>Investment Projection</h4>
+                            <p>Total Investment: <span id="total-investment">₹0</span></p>
+                            <p>Estimated Future Value: <span id="future-value">₹0</span></p>
+                            <p>Estimated Returns: <span id="total-returns">₹0</span></p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </footer>
+        </section>
     </div>
 
-    <!-- Results Page (Initially Hidden) -->
-    <div id="results-page" class="hidden">
-        <header>
-            <div class="container">
-                <div class="header-content">
-                    <div class="logo">
-                        <i class="fas fa-chart-line"></i>
-                        <span>WealthWise</span>
-                    </div>
-                    <nav>
-                        <ul>
-                            <li><a href="#" id="back-to-form">Back to Form</a></li>
-                            <li><a href="#summary">Financial Summary</a></li>
-                            <li><a href="#recommendations">Recommendations</a></li>
-                            <li><a href="#investment-plan">Investment Plan</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>
-
+    <!-- Financial Plan Page (Results) -->
+    <div id="financial-plan-page" class="page">
         <section class="results-hero">
             <div class="container">
                 <h1>Your Personalized Financial Plan</h1>
@@ -756,22 +971,22 @@
                         <h3><i class="fas fa-bullseye"></i> Your Financial Goals</h3>
                         <div class="advice-grid">
                             <div class="advice-card">
-                                <h4>Short-Term Goals</h4>
+                                <h4>Short-Term Goals (1-3 years)</h4>
                                 <p id="short-term-display">No short-term goals specified</p>
                             </div>
                             <div class="advice-card">
-                                <h4>Medium-Term Goals</h4>
+                                <h4>Medium-Term Goals (3-7 years)</h4>
                                 <p id="medium-term-display">No medium-term goals specified</p>
                             </div>
                             <div class="advice-card">
-                                <h4>Long-Term Goals</h4>
+                                <h4>Long-Term Goals (7+ years)</h4>
                                 <p id="long-term-display">No long-term goals specified</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="results-section" id="recommendations">
+                <div class="results-section">
                     <div class="card">
                         <h3><i class="fas fa-lightbulb"></i> Financial Recommendations</h3>
                         <ul class="recommendation-list" id="recommendations-list">
@@ -780,7 +995,7 @@
                     </div>
                 </div>
 
-                <div class="results-section" id="investment-plan">
+                <div class="results-section">
                     <div class="card">
                         <h3><i class="fas fa-chart-pie"></i> Recommended Investment Allocation</h3>
                         <div class="investment-breakdown" id="investment-allocation">
@@ -791,32 +1006,9 @@
 
                 <div class="results-section">
                     <div class="card">
-                        <h3><i class="fas fa-road"></i> Next Steps</h3>
-                        <div class="advice-grid">
-                            <div class="advice-card priority-high">
-                                <h4>Immediate Actions (This Week)</h4>
-                                <ul>
-                                    <li>Review your monthly budget</li>
-                                    <li>Set up automatic savings transfers</li>
-                                    <li>Check your credit report</li>
-                                </ul>
-                            </div>
-                            <div class="advice-card priority-medium">
-                                <h4>Short-Term Actions (This Month)</h4>
-                                <ul>
-                                    <li>Research recommended investment options</li>
-                                    <li>Set specific savings targets for your goals</li>
-                                    <li>Review insurance coverage</li>
-                                </ul>
-                            </div>
-                            <div class="advice-card priority-low">
-                                <h4>Long-Term Planning (Next 3-6 Months)</h4>
-                                <ul>
-                                    <li>Meet with a financial advisor</li>
-                                    <li>Create or update your will</li>
-                                    <li>Consider tax-efficient investment strategies</li>
-                                </ul>
-                            </div>
+                        <h3><i class="fas fa-road"></i> Action Timeline</h3>
+                        <div class="timeline" id="action-timeline">
+                            <!-- Timeline items will be added here by JavaScript -->
                         </div>
                     </div>
                 </div>
@@ -825,139 +1017,376 @@
                     <button class="btn" id="print-plan">
                         <i class="fas fa-print"></i> Print Your Plan
                     </button>
-                    <button class="btn" style="background-color: var(--secondary); margin-left: 1rem;" id="save-plan">
+                    <button class="btn btn-secondary" style="margin-left: 1rem;" id="save-plan">
                         <i class="fas fa-download"></i> Save Your Plan
+                    </button>
+                    <button class="btn" style="margin-left: 1rem; background-color: var(--warning);" id="reset-plan">
+                        <i class="fas fa-redo"></i> Start New Plan
                     </button>
                 </div>
             </div>
         </section>
+    </div>
 
-        <footer>
+    <!-- Resources Page -->
+    <div id="resources-page" class="page">
+        <section class="section">
             <div class="container">
-                <div class="footer-content">
-                    <div class="footer-section">
-                        <h3>WealthWise</h3>
-                        <p>Your trusted partner in financial planning and investment advice.</p>
+                <div class="section-title">
+                    <h2>Financial Resources</h2>
+                    <p>Educational materials and tools to enhance your financial knowledge</p>
+                </div>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <i class="fas fa-book"></i>
+                        <h4>Learning Center</h4>
+                        <p>Basic financial concepts, investment principles, and money management tips.</p>
+                        <ul>
+                            <li>Understanding Compound Interest</li>
+                            <li>Budgeting 101</li>
+                            <li>Risk vs Return</li>
+                            <li>Tax Planning Basics</li>
+                        </ul>
                     </div>
                     
-                    <div class="footer-section">
-                        <h3>Disclaimer</h3>
-                        <p>This financial plan is for educational purposes only. Please consult with a qualified financial advisor before making investment decisions.</p>
+                    <div class="resource-card">
+                        <i class="fas fa-calculator"></i>
+                        <h4>Financial Calculators</h4>
+                        <p>Tools to help you plan and calculate various financial scenarios.</p>
+                        <ul>
+                            <li>Retirement Calculator</li>
+                            <li>Loan EMI Calculator</li>
+                            <li>College Savings Calculator</li>
+                            <li>Inflation Calculator</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <i class="fas fa-newspaper"></i>
+                        <h4>Market Updates</h4>
+                        <p>Stay informed with the latest financial news and market trends.</p>
+                        <ul>
+                            <li>Stock Market Overview</li>
+                            <li>Mutual Fund Performance</li>
+                            <li>Economic Indicators</li>
+                            <li>Investment Opportunities</li>
+                        </ul>
                     </div>
                 </div>
                 
-                <div class="copyright">
-                    <p>&copy; 2023 WealthWise Financial Planning. All rights reserved.</p>
+                <div class="card" style="margin-top: 3rem;">
+                    <h3><i class="fas fa-graduation-cap"></i> Beginner's Guide to Investing</h3>
+                    <p>If you're new to investing, here are some key principles to remember:</p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                        <li><strong>Start Early:</strong> The power of compounding works best over long periods</li>
+                        <li><strong>Diversify:</strong> Don't put all your eggs in one basket</li>
+                        <li><strong>Invest Regularly:</strong> Systematic investment plans (SIPs) can help average out market volatility</li>
+                        <li><strong>Think Long-term:</strong> Avoid making decisions based on short-term market movements</li>
+                        <li><strong>Understand Fees:</strong> Be aware of all charges associated with your investments</li>
+                    </ul>
                 </div>
             </div>
-        </footer>
+        </section>
     </div>
+
+    <!-- Footer (Same for all pages) -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>WealthWise</h3>
+                    <p>Your trusted partner in financial planning and investment advice. We're committed to helping you achieve your financial dreams.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#" class="nav-link" data-page="home">Home</a>
+                    <a href="#" class="nav-link" data-page="financial-profile">Financial Profile</a>
+                    <a href="#" class="nav-link" data-page="investment-advice">Investment Advice</a>
+                    <a href="#" class="nav-link" data-page="resources">Resources</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Aadharshila Vidyamandi, Koni, Bilaspur, Chhattisgarh, INDIA</p>
+                    <p><i class="fas fa-envelope"></i> ts3265184@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 WealthWise Financial Planning. All rights reserved.</p>
+                <p>This tool provides educational information only and does not constitute financial advice.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('financial-form');
-            const progressBar = document.getElementById('form-progress');
-            const inputPage = document.getElementById('input-page');
-            const resultsPage = document.getElementById('results-page');
-            const backToFormButton = document.getElementById('back-to-form');
-            const printPlanButton = document.getElementById('print-plan');
-            const savePlanButton = document.getElementById('save-plan');
+            // Navigation System
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const startPlanningBtn = document.querySelector('.start-planning-btn');
             
-            // Update progress bar as user fills the form
-            const formInputs = form.querySelectorAll('input, select, textarea');
-            formInputs.forEach(input => {
-                input.addEventListener('input', updateProgress);
-                input.addEventListener('change', updateProgress);
+            // Set initial active page
+            setActivePage('home');
+            
+            // Navigation click handlers
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    setActivePage(pageId);
+                });
             });
             
-            function updateProgress() {
-                let filledFields = 0;
-                formInputs.forEach(input => {
-                    if (input.type === 'checkbox' || input.type === 'radio') {
-                        if (input.checked) filledFields++;
+            // Start Planning button
+            if (startPlanningBtn) {
+                startPlanningBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    setActivePage('financial-profile');
+                });
+            }
+            
+            function setActivePage(pageId) {
+                // Update navigation
+                navLinks.forEach(link => {
+                    if (link.getAttribute('data-page') === pageId) {
+                        link.classList.add('active');
                     } else {
-                        if (input.value.trim() !== '') filledFields++;
+                        link.classList.remove('active');
                     }
                 });
                 
-                const progress = (filledFields / formInputs.length) * 100;
-                progressBar.style.width = `${progress}%`;
+                // Update pages
+                pages.forEach(page => {
+                    if (page.id === `${pageId}-page`) {
+                        page.classList.add('active');
+                        // Scroll to top when changing pages
+                        window.scrollTo(0, 0);
+                    } else {
+                        page.classList.remove('active');
+                    }
+                });
+                
+                // If going to financial plan page, check if we have data
+                if (pageId === 'financial-plan') {
+                    const formData = JSON.parse(localStorage.getItem('financialFormData'));
+                    if (formData) {
+                        generateResults(formData);
+                    } else {
+                        // If no data, redirect to financial profile
+                        setActivePage('financial-profile');
+                    }
+                }
             }
             
-            // Form submission
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Get form values
-                const formData = {
-                    annualIncome: parseFloat(document.getElementById('annual-income').value) || 0,
-                    incomeSource: document.getElementById('income-source').value,
-                    jobStability: document.getElementById('job-stability').value,
-                    savings: parseFloat(document.getElementById('savings').value) || 0,
-                    investments: parseFloat(document.getElementById('investments').value) || 0,
-                    property: parseFloat(document.getElementById('property').value) || 0,
-                    debts: parseFloat(document.getElementById('debts').value) || 0,
-                    monthlyExpenses: parseFloat(document.getElementById('monthly-expenses').value) || 0,
-                    emergencyFund: parseFloat(document.getElementById('emergency-fund').value) || 0,
-                    shortTermGoals: document.getElementById('short-term-goals').value,
-                    mediumTermGoals: document.getElementById('medium-term-goals').value,
-                    longTermGoals: document.getElementById('long-term-goals').value,
-                    riskTolerance: document.getElementById('risk-tolerance').value,
-                    investmentKnowledge: document.getElementById('investment-knowledge').value,
-                    timeHorizon: document.getElementById('time-horizon').value
-                };
-                
-                // Store form data for results page
-                localStorage.setItem('financialFormData', JSON.stringify(formData));
-                
-                // Show results page
-                inputPage.classList.add('hidden');
-                resultsPage.classList.remove('hidden');
-                
-                // Generate results
-                generateResults(formData);
-            });
+            // Financial Form Logic
+            const form = document.getElementById('financial-form');
+            const progressBar = document.getElementById('form-progress');
             
-            // Back to form button
-            backToFormButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                resultsPage.classList.add('hidden');
-                inputPage.classList.remove('hidden');
-                window.scrollTo(0, 0);
-            });
+            if (form) {
+                // Update progress bar as user fills the form
+                const formInputs = form.querySelectorAll('input, select, textarea');
+                formInputs.forEach(input => {
+                    input.addEventListener('input', updateProgress);
+                    input.addEventListener('change', updateProgress);
+                });
+                
+                // Form submission
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Validate form
+                    if (!form.checkValidity()) {
+                        alert('Please fill in all required fields correctly.');
+                        return;
+                    }
+                    
+                    // Get form values
+                    const formData = {
+                        annualIncome: parseFloat(document.getElementById('annual-income').value) || 0,
+                        incomeSource: document.getElementById('income-source').value,
+                        jobStability: document.getElementById('job-stability').value,
+                        savings: parseFloat(document.getElementById('savings').value) || 0,
+                        investments: parseFloat(document.getElementById('investments').value) || 0,
+                        property: parseFloat(document.getElementById('property').value) || 0,
+                        debts: parseFloat(document.getElementById('debts').value) || 0,
+                        monthlyExpenses: parseFloat(document.getElementById('monthly-expenses').value) || 0,
+                        emergencyFund: parseFloat(document.getElementById('emergency-fund').value) || 0,
+                        shortTermGoals: document.getElementById('short-term-goals').value,
+                        mediumTermGoals: document.getElementById('medium-term-goals').value,
+                        longTermGoals: document.getElementById('long-term-goals').value,
+                        riskTolerance: document.getElementById('risk-tolerance').value,
+                        investmentKnowledge: document.getElementById('investment-knowledge').value,
+                        timeHorizon: document.getElementById('time-horizon').value,
+                        timestamp: new Date().toISOString()
+                    };
+                    
+                    // Store form data
+                    localStorage.setItem('financialFormData', JSON.stringify(formData));
+                    localStorage.setItem('hasPlan', 'true');
+                    
+                    // Show success message and redirect
+                    alert('Your financial plan has been generated successfully!');
+                    setActivePage('financial-plan');
+                });
+                
+                function updateProgress() {
+                    let filledFields = 0;
+                    const requiredInputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+                    
+                    requiredInputs.forEach(input => {
+                        if (input.type === 'checkbox' || input.type === 'radio') {
+                            if (input.checked) filledFields++;
+                        } else {
+                            if (input.value.trim() !== '') filledFields++;
+                        }
+                    });
+                    
+                    const progress = (filledFields / requiredInputs.length) * 100;
+                    if (progressBar) {
+                        progressBar.style.width = `${progress}%`;
+                    }
+                }
+                
+                // Initialize progress bar
+                updateProgress();
+            }
             
-            // Print plan button
-            printPlanButton.addEventListener('click', function() {
-                window.print();
-            });
+            // Investment Calculator
+            const calculateInvestmentBtn = document.getElementById('calculate-investment');
+            if (calculateInvestmentBtn) {
+                calculateInvestmentBtn.addEventListener('click', function() {
+                    const initial = parseFloat(document.getElementById('initial-investment').value) || 0;
+                    const monthly = parseFloat(document.getElementById('monthly-contribution').value) || 0;
+                    const annualReturn = parseFloat(document.getElementById('annual-return').value) || 0;
+                    const years = parseFloat(document.getElementById('investment-years').value) || 0;
+                    
+                    if (annualReturn <= 0 || years <= 0) {
+                        alert('Please enter valid values for annual return and investment period.');
+                        return;
+                    }
+                    
+                    // Calculate future value
+                    const monthlyRate = annualReturn / 100 / 12;
+                    const months = years * 12;
+                    
+                    // Future value of initial investment
+                    let futureValue = initial * Math.pow(1 + monthlyRate, months);
+                    
+                    // Future value of monthly contributions
+                    if (monthly > 0) {
+                        futureValue += monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate);
+                    }
+                    
+                    const totalInvestment = initial + (monthly * months);
+                    const totalReturns = futureValue - totalInvestment;
+                    
+                    // Update result
+                    document.getElementById('total-investment').textContent = `₹${totalInvestment.toLocaleString('en-IN')}`;
+                    document.getElementById('future-value').textContent = `₹${futureValue.toLocaleString('en-IN', { maximumFractionDigits: 0 })}`;
+                    document.getElementById('total-returns').textContent = `₹${totalReturns.toLocaleString('en-IN', { maximumFractionDigits: 0 })}`;
+                    
+                    // Show result
+                    document.getElementById('investment-result').classList.add('active');
+                });
+            }
             
-            // Save plan button
-            savePlanButton.addEventListener('click', function() {
-                alert('Your financial plan has been saved! (In a real application, this would download a PDF)');
-            });
+            // Financial Plan Page Functions
+            const printPlanBtn = document.getElementById('print-plan');
+            const savePlanBtn = document.getElementById('save-plan');
+            const resetPlanBtn = document.getElementById('reset-plan');
+            
+            if (printPlanBtn) {
+                printPlanBtn.addEventListener('click', function() {
+                    window.print();
+                });
+            }
+            
+            if (savePlanBtn) {
+                savePlanBtn.addEventListener('click', function() {
+                    const formData = JSON.parse(localStorage.getItem('financialFormData'));
+                    if (!formData) {
+                        alert('No financial plan data found.');
+                        return;
+                    }
+                    
+                    // Create a downloadable JSON file
+                    const dataStr = JSON.stringify(formData, null, 2);
+                    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+                    
+                    const exportFileDefaultName = `wealthwise-financial-plan-${new Date().toISOString().slice(0,10)}.json`;
+                    
+                    const linkElement = document.createElement('a');
+                    linkElement.setAttribute('href', dataUri);
+                    linkElement.setAttribute('download', exportFileDefaultName);
+                    linkElement.click();
+                    
+                    alert('Your financial plan has been saved as a JSON file!');
+                });
+            }
+            
+            if (resetPlanBtn) {
+                resetPlanBtn.addEventListener('click', function() {
+                    if (confirm('Are you sure you want to start a new financial plan? This will clear your current data.')) {
+                        localStorage.removeItem('financialFormData');
+                        localStorage.removeItem('hasPlan');
+                        setActivePage('financial-profile');
+                        
+                        // Reset form if it exists
+                        if (form) {
+                            form.reset();
+                            if (progressBar) {
+                                progressBar.style.width = '0%';
+                            }
+                        }
+                    }
+                });
+            }
             
             function generateResults(data) {
+                if (!data) return;
+                
                 // Calculate financial metrics
                 const netWorth = data.savings + data.investments + data.property - data.debts;
                 const debtToIncome = data.annualIncome > 0 ? (data.debts / data.annualIncome) * 100 : 0;
                 const monthlySavingsPotential = (data.annualIncome / 12) - data.monthlyExpenses;
                 
                 // Update summary cards
-                document.getElementById('net-worth-value').textContent = `₹${netWorth.toLocaleString('en-IN')}`;
-                document.getElementById('debt-income-value').textContent = `${debtToIncome.toFixed(1)}%`;
-                document.getElementById('savings-potential-value').textContent = `₹${Math.max(0, monthlySavingsPotential).toLocaleString('en-IN')}`;
-                document.getElementById('risk-profile-value').textContent = formatRiskProfile(data.riskTolerance);
+                const netWorthEl = document.getElementById('net-worth-value');
+                const debtIncomeEl = document.getElementById('debt-income-value');
+                const savingsPotentialEl = document.getElementById('savings-potential-value');
+                const riskProfileEl = document.getElementById('risk-profile-value');
+                
+                if (netWorthEl) netWorthEl.textContent = `₹${netWorth.toLocaleString('en-IN')}`;
+                if (debtIncomeEl) debtIncomeEl.textContent = `${debtToIncome.toFixed(1)}%`;
+                if (savingsPotentialEl) savingsPotentialEl.textContent = `₹${Math.max(0, monthlySavingsPotential).toLocaleString('en-IN')}`;
+                if (riskProfileEl) riskProfileEl.textContent = formatRiskProfile(data.riskTolerance);
                 
                 // Update goals display
-                document.getElementById('short-term-display').textContent = data.shortTermGoals || 'No short-term goals specified';
-                document.getElementById('medium-term-display').textContent = data.mediumTermGoals || 'No medium-term goals specified';
-                document.getElementById('long-term-display').textContent = data.longTermGoals || 'No long-term goals specified';
+                const shortTermEl = document.getElementById('short-term-display');
+                const mediumTermEl = document.getElementById('medium-term-display');
+                const longTermEl = document.getElementById('long-term-display');
+                
+                if (shortTermEl) shortTermEl.textContent = data.shortTermGoals || 'No short-term goals specified';
+                if (mediumTermEl) mediumTermEl.textContent = data.mediumTermGoals || 'No medium-term goals specified';
+                if (longTermEl) longTermEl.textContent = data.longTermGoals || 'No long-term goals specified';
                 
                 // Generate recommendations
                 generateRecommendations(data, netWorth, debtToIncome, monthlySavingsPotential);
                 
                 // Generate investment allocation
                 generateInvestmentAllocation(data);
+                
+                // Generate action timeline
+                generateActionTimeline(data);
             }
             
             function formatRiskProfile(risk) {
@@ -971,6 +1400,8 @@
             
             function generateRecommendations(data, netWorth, debtToIncome, monthlySavings) {
                 const recommendationsList = document.getElementById('recommendations-list');
+                if (!recommendationsList) return;
+                
                 recommendationsList.innerHTML = '';
                 
                 const recommendations = [];
@@ -978,13 +1409,14 @@
                 // Emergency fund recommendation
                 const recommendedEmergencyFund = data.monthlyExpenses * 6;
                 if (data.emergencyFund < recommendedEmergencyFund) {
+                    const shortage = recommendedEmergencyFund - data.emergencyFund;
                     recommendations.push({
-                        text: `Build your emergency fund to ₹${recommendedEmergencyFund.toLocaleString('en-IN')} (6 months of expenses)`,
+                        text: `Build emergency fund: Need ₹${shortage.toLocaleString('en-IN')} more to reach 6 months expenses (₹${recommendedEmergencyFund.toLocaleString('en-IN')})`,
                         priority: 'high'
                     });
                 } else {
                     recommendations.push({
-                        text: 'Your emergency fund is adequate. Great job!',
+                        text: '✓ Emergency fund is adequate (6+ months of expenses)',
                         priority: 'low'
                     });
                 }
@@ -992,17 +1424,22 @@
                 // Debt recommendation
                 if (debtToIncome > 40) {
                     recommendations.push({
-                        text: 'Prioritize paying down high-interest debt before aggressive investing',
+                        text: `High debt burden (${debtToIncome.toFixed(1)}% of income). Prioritize debt repayment.`,
                         priority: 'high'
                     });
                 } else if (debtToIncome > 20) {
                     recommendations.push({
-                        text: 'Your debt level is manageable. Consider balancing debt repayment with investing',
+                        text: `Manageable debt level (${debtToIncome.toFixed(1)}% of income). Balance repayment with savings.`,
                         priority: 'medium'
+                    });
+                } else if (data.debts > 0) {
+                    recommendations.push({
+                        text: `Low debt level (${debtToIncome.toFixed(1)}% of income). Maintain current repayment schedule.`,
+                        priority: 'low'
                     });
                 } else {
                     recommendations.push({
-                        text: 'Your debt level is excellent. Focus on wealth building through investments',
+                        text: '✓ No debt outstanding. Excellent financial position.',
                         priority: 'low'
                     });
                 }
@@ -1010,17 +1447,17 @@
                 // Savings recommendation
                 if (monthlySavings < 0) {
                     recommendations.push({
-                        text: 'You are spending more than you earn. Focus on reducing expenses or increasing income',
+                        text: `Monthly deficit: ₹${Math.abs(monthlySavings).toLocaleString('en-IN')}. Urgent need to reduce expenses or increase income.`,
                         priority: 'high'
                     });
-                } else if (monthlySavings < 5000) {
+                } else if (monthlySavings < data.monthlyExpenses * 0.2) {
                     recommendations.push({
-                        text: 'Try to increase your savings rate by cutting discretionary spending',
+                        text: `Low savings rate (₹${monthlySavings.toLocaleString('en-IN')}/month). Aim to save 20% of income.`,
                         priority: 'medium'
                     });
                 } else {
                     recommendations.push({
-                        text: 'This is a good savings rate. Consider automating your savings',
+                        text: `Good savings rate: ₹${monthlySavings.toLocaleString('en-IN')}/month. Consider increasing to 30% for accelerated growth.`,
                         priority: 'low'
                     });
                 }
@@ -1028,15 +1465,33 @@
                 // Investment knowledge recommendation
                 if (data.investmentKnowledge === 'beginner') {
                     recommendations.push({
-                        text: 'Consider starting with low-cost index funds or target-date funds',
+                        text: 'Beginner investor: Start with SIPs in diversified mutual funds. Consider consulting a financial advisor.',
                         priority: 'medium'
+                    });
+                } else if (data.investmentKnowledge === 'intermediate') {
+                    recommendations.push({
+                        text: 'Intermediate investor: Diversify across asset classes. Consider adding international exposure.',
+                        priority: 'low'
                     });
                 }
                 
                 // Job stability recommendation
                 if (data.jobStability === 'low') {
                     recommendations.push({
-                        text: 'Given your job instability, maintain a larger emergency fund (9-12 months)',
+                        text: 'Job instability detected. Build 9-12 month emergency fund before aggressive investing.',
+                        priority: 'high'
+                    });
+                }
+                
+                // Risk tolerance and time horizon alignment
+                if (data.riskTolerance === 'conservative' && data.timeHorizon === 'long') {
+                    recommendations.push({
+                        text: 'Conservative allocation may not meet long-term goals. Consider moderate growth investments.',
+                        priority: 'medium'
+                    });
+                } else if (data.riskTolerance === 'aggressive' && data.timeHorizon === 'short') {
+                    recommendations.push({
+                        text: 'Aggressive investing for short-term goals is risky. Consider safer options.',
                         priority: 'high'
                     });
                 }
@@ -1045,9 +1500,9 @@
                 recommendations.forEach(rec => {
                     const li = document.createElement('li');
                     li.innerHTML = `
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-${rec.priority === 'high' ? 'exclamation-triangle' : rec.priority === 'medium' ? 'info-circle' : 'check-circle'}"></i>
                         <span>${rec.text}</span>
-                        <span class="priority-badge priority-${rec.priority}-badge">${rec.priority.toUpperCase()} PRIORITY</span>
+                        <span class="priority-badge priority-${rec.priority}-badge">${rec.priority.toUpperCase()}</span>
                     `;
                     recommendationsList.appendChild(li);
                 });
@@ -1055,26 +1510,31 @@
             
             function generateInvestmentAllocation(data) {
                 const allocationContainer = document.getElementById('investment-allocation');
+                if (!allocationContainer) return;
+                
                 allocationContainer.innerHTML = '';
                 
                 // Determine asset allocation based on risk and horizon
-                let stocks, bonds, cash, realEstate;
+                let stocks, bonds, cash, realEstate, other;
                 
                 if (data.riskTolerance === 'conservative') {
                     stocks = 30;
                     bonds = 50;
                     cash = 15;
                     realEstate = 5;
+                    other = 0;
                 } else if (data.riskTolerance === 'moderate') {
                     stocks = 60;
                     bonds = 30;
                     cash = 5;
                     realEstate = 5;
+                    other = 0;
                 } else { // aggressive
                     stocks = 80;
                     bonds = 15;
                     cash = 0;
                     realEstate = 5;
+                    other = 0;
                 }
                 
                 // Adjust based on time horizon
@@ -1085,15 +1545,26 @@
                 } else if (data.timeHorizon === 'long') {
                     stocks = Math.min(90, stocks + 10);
                     bonds = Math.max(10, bonds - 10);
+                    other = 5;
+                    stocks -= 5;
                 }
                 
                 // Create allocation items
                 const allocations = [
-                    { name: 'Stocks', percentage: stocks, description: 'Growth-oriented investments' },
-                    { name: 'Bonds', percentage: bonds, description: 'Income and stability' },
-                    { name: 'Cash', percentage: cash, description: 'Liquidity and safety' },
-                    { name: 'Real Estate', percentage: realEstate, description: 'Diversification and inflation hedge' }
+                    { name: 'Stocks/Equity', percentage: stocks, description: 'Growth-oriented: Mutual funds, direct stocks, ETFs' },
+                    { name: 'Bonds/Debt', percentage: bonds, description: 'Income and stability: Government bonds, corporate bonds, debt funds' },
+                    { name: 'Cash/Liquid', percentage: cash, description: 'Liquidity and safety: Savings accounts, fixed deposits, liquid funds' },
+                    { name: 'Real Estate', percentage: realEstate, description: 'Diversification: REITs, property investment' }
                 ];
+                
+                // Add other if present
+                if (other > 0) {
+                    allocations.push({ 
+                        name: 'Other', 
+                        percentage: other, 
+                        description: 'Alternative investments: Gold, commodities, international funds' 
+                    });
+                }
                 
                 allocations.forEach(allocation => {
                     const item = document.createElement('div');
@@ -1101,19 +1572,99 @@
                     item.innerHTML = `
                         <div>
                             <strong>${allocation.name}</strong>
-                            <div>${allocation.description}</div>
+                            <div style="font-size: 0.9rem; color: #666;">${allocation.description}</div>
                         </div>
                         <div class="investment-bar">
                             <div class="investment-fill" style="width: ${allocation.percentage}%"></div>
                         </div>
-                        <div>${allocation.percentage}%</div>
+                        <div><strong>${allocation.percentage}%</strong></div>
                     `;
                     allocationContainer.appendChild(item);
                 });
             }
             
-            // Initialize progress bar
-            updateProgress();
+            function generateActionTimeline(data) {
+                const timelineContainer = document.getElementById('action-timeline');
+                if (!timelineContainer) return;
+                
+                timelineContainer.innerHTML = '';
+                
+                const actions = [];
+                
+                // Immediate actions (this week)
+                actions.push({
+                    time: 'Immediate (This Week)',
+                    title: 'Review & Organize',
+                    description: 'Gather all financial documents. Create a budget tracking system.',
+                    icon: 'fa-clipboard-list'
+                });
+                
+                // Month 1
+                actions.push({
+                    time: 'Month 1',
+                    title: 'Emergency Fund Setup',
+                    description: 'Set up automatic transfers to build emergency fund if needed.',
+                    icon: 'fa-piggy-bank'
+                });
+                
+                // Month 2
+                actions.push({
+                    time: 'Month 2',
+                    title: 'Debt Management',
+                    description: data.debts > 0 ? 
+                        'Create debt repayment plan focusing on high-interest debts first.' :
+                        'Review credit report and maintain good credit habits.',
+                    icon: 'fa-credit-card'
+                });
+                
+                // Month 3
+                actions.push({
+                    time: 'Month 3',
+                    title: 'Investment Account Setup',
+                    description: 'Open investment accounts (Demat, mutual fund) as per recommended allocation.',
+                    icon: 'fa-chart-line'
+                });
+                
+                // Month 6
+                actions.push({
+                    time: 'Month 6',
+                    title: 'Portfolio Review',
+                    description: 'Review investment performance and rebalance if necessary.',
+                    icon: 'fa-search'
+                });
+                
+                // Year 1
+                actions.push({
+                    time: 'Year 1',
+                    title: 'Annual Financial Review',
+                    description: 'Complete review of financial goals, progress, and adjustments.',
+                    icon: 'fa-calendar-check'
+                });
+                
+                // Add actions to timeline
+                actions.forEach((action, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'timeline-item';
+                    item.innerHTML = `
+                        <div style="margin-bottom: 0.5rem; color: var(--secondary); font-weight: 600;">
+                            <i class="fas ${action.icon}"></i> ${action.time}
+                        </div>
+                        <h4 style="margin-bottom: 0.5rem;">${action.title}</h4>
+                        <p>${action.description}</p>
+                    `;
+                    timelineContainer.appendChild(item);
+                });
+            }
+            
+            // Check if user has a saved plan
+            const hasPlan = localStorage.getItem('hasPlan') === 'true';
+            if (hasPlan) {
+                // Update navigation to show financial plan is available
+                const planLink = document.querySelector('[data-page="financial-plan"]');
+                if (planLink) {
+                    planLink.innerHTML += ' <span style="font-size: 0.7em; background: var(--accent); padding: 2px 6px; border-radius: 10px;">✓</span>';
+                }
+            }
         });
     </script>
 </body>
